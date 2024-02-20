@@ -1,0 +1,40 @@
+/* Description.css */
+.title {
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.info {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+ul {
+    list-style-type: disc;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #666;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.cart-button {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cart-button:hover {
+    background-color: #0056b3;
+}

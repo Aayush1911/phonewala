@@ -1,0 +1,16 @@
+const mongoose=require('mongoose')
+const Schema=mongoose.Schema;
+const mobile=require('./mobile')
+
+const cartschema=new Schema({
+    productId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'mobile'
+    },
+    quantity:{
+        type:Number,
+        default:1
+    }
+})
+const cart=mongoose.model('cart',cartschema)
+module.exports=cart

@@ -16,3 +16,4 @@ app.use(cors({
   }))
 app.use('/auth',require('./routes/authroute'));
 app.use('/mobile',require('./routes/mobileroute'));
+app.use('/cart',require('./routes/cartroute'))

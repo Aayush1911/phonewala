@@ -17,6 +17,7 @@ function Homepage() {
       console.error('Error fetching mobile data:', error);
     }
   };
+  const isAuthenticated = localStorage.getItem('token');
 
   useEffect(() => {
     getallmobile();
@@ -39,7 +40,12 @@ function Homepage() {
                 <p className="card-text"><strong>Company :</strong> {mobile.company_name}</p>
                 <p className="card-text"><b>Price : ₹</b>{mobile.price}</p>
                 <Link to={'/cart'} style={{ textDecoration: 'none', color: 'black' }}>
-                  <button style={{border:"none",backgroundColor:"white",color:"red",display:"block",margin:"0 auto"}} className='icon'><FaShoppingCart /></button>
+                  <button  onClick={(e) => {
+                  if (!isAuthenticated) {
+                    e.preventDefault();
+                    alert('Please log in to access the cart.');
+                  }
+                }} style={{border:"none",backgroundColor:"white",color:"red",display:"block",margin:"0 auto"}} className='icon'><FaShoppingCart /></button>
                 </Link>
               </div>
               </Link>

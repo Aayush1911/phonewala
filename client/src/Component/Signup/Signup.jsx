@@ -8,8 +8,8 @@ function Signup(props) {
     const handlesubmit = async (e) => {
         e.preventDefault();
         const {name,email,password}=credentails
-        const host = "https://i-notebook-r2vy.vercel.app";
-        const response = await fetch(`${host}/api/auth/createuser`, {
+        const host = 'http://localhost:4000';
+        const response = await fetch(`${host}/auth/signup`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -17,12 +17,12 @@ function Signup(props) {
           body: JSON.stringify({ name,email,password }),
         });
         const json = await response.json();
-        if(json.success){
+        if(json){
             localStorage.setItem('token',json.authtoken)
             navigate('/')
-            props.showalert('Signup Successfully','success')
+            // props.showalert('Signup Successfully','success')
         }else{
-           props.showalert('Invalid Details','danger')
+          //  props.showalert('Invalid Details','danger')
         }
         
       };

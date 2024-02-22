@@ -11,7 +11,7 @@ const addcart=async(req,res)=>{
         }
         let cartitem=await cart.findOne({productId:productId})
         if(cartitem){
-            cartitem.quantity+=parsedQuantity
+            cartitem.quantity=parsedQuantity
         }else{
             cartitem = new cart({ productId, quantity});
         }
@@ -25,6 +25,32 @@ const addcart=async(req,res)=>{
         console.log(err);
     }
 }
+const updatecontroller=async(req,res)=>{
+    const quantity=req.body
+    let find_cart=await cart.findById(req.params.id)
+    if(!find_cart){
+        return res.send('Cart does not exist')
+    }
+    let update_quantity=quantity
+    find_cart=await cart.findByIdAndUpdate(
+        req.params.id,
+        {$set:update_quantity},
+        {new:true}
+    )
+    res.json(find_cart)
+}
+const deletecontroller=async(req,res)=>{
+    try{    
+        let deletecart=await cart.findById(req.params.id)
+        if(!deletecart){
+            return res.send('Product in cart does not exist')
+        }
+        deletecart=await cart.findByIdAndDelete(req.params.id)
+        return res.send('Deleted')
+    }catch(err){
+        console.log(err);
+    }
+}
 module.exports={
-    addcart
+    addcart,deletecontroller,updatecontroller
 }

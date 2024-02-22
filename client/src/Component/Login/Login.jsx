@@ -6,8 +6,8 @@ function Login(props) {
     let navigate=useNavigate()
   const handlesubmit = async (e) => {
     e.preventDefault();
-    const host = "https://i-notebook-r2vy.vercel.app";
-    const response = await fetch(`${host}/api/auth/login`, {
+    const host = 'http://localhost:4000';
+    const response = await fetch(`${host}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -16,13 +16,13 @@ function Login(props) {
     });
     const json = await response.json();
     console.log(json);
-    if(json.success){
-        localStorage.setItem('token',json.authtoken)
-        props.showalert('Loged in Successfully','success')
-        navigate('/')
-    }else{
-       props.showalert('Invalid Details','danger')
-    }
+    if(json){
+      localStorage.setItem('token',json.authtoken)
+      // props.showalert('Loged in Successfully','success')
+      navigate('/')
+  }else{
+    //  props.showalert('Invalid Details','danger')
+  }
   };
 
   const [credentails, setcredentails] = useState({email:'',password:''});

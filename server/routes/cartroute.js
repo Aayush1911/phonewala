@@ -5,5 +5,6 @@ const requireuser = require("../middleware/requireuser");
 router.post('/add',requireuser,cartcontroller.addcart)
 router.delete('/delete/:id',requireuser,cartcontroller.deletecontroller)
 router.post('/update/:id',requireuser,cartcontroller.updatecontroller)
+router.get('/all',cartcontroller.getallcartcontroller)
 
 module.exports=router

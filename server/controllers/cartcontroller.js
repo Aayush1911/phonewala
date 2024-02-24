@@ -1,6 +1,13 @@
 const cart=require('../models/cart');
 const mobile=require('../models/mobile');
-
+const getallcartcontroller=async (req,res)=>{
+    try{
+        const allcart=await cart.find()
+        return res.json(allcart)
+    }catch(err){
+        console.log(err);
+    }
+}
 const addcart=async(req,res)=>{
     try{
         const {productId,quantity}=req.body;
@@ -52,5 +59,5 @@ const deletecontroller=async(req,res)=>{
     }
 }
 module.exports={
-    addcart,deletecontroller,updatecontroller
+    addcart,deletecontroller,updatecontroller,getallcartcontroller
 }

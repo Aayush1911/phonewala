@@ -23,7 +23,7 @@ const getbyidcontroller=async(req,res)=>{
     try{
         let mob=await mobile.findById(req.params.id)
         if(!mob){
-            return res.send('Not found')
+            return res.status(404).json({ error: 'Mobile not found' });
         }
         return res.json(mob)
     }catch(err){

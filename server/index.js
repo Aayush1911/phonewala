@@ -11,7 +11,7 @@ app.listen(port,()=>{
 })
 app.use(cors({
     orgin:["http://localhost:5173/"],
-    methods:["POST","GET"],
+    methods:["POST","GET","DELETE"],
     credentials:true
   }))
 app.use('/auth',require('./routes/authroute'));

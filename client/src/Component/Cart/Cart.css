@@ -1,0 +1,79 @@
+/* Cart button container */
+.cart-button-container {
+    display: flex; /* Use flexbox for layout */
+    align-items: center;
+  }
+  
+  /* Cart button styles */
+  .cart-button {
+    background-color: transparent; /* Set background color to transparent */
+    background-color: #4CAF50 !important; /* Green background */
+    border: none;
+    color: white;
+    padding: 10px 20px; /* Add padding */
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px; /* Adjust margin */
+    cursor: pointer;
+    border-radius: 50%; /* Rounded corners */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Add shadow */
+  }
+  
+  /* Style the buttons on hover */
+  .cart-button:hover {
+    background-color: #27e930 !important;
+  }
+  
+  /* Style the buttons on click */
+  .cart-button:active {
+    background-color: #367c39 !important;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  }
+  /* Default styles for cart buttons */
+.cart-button {
+    background-color: transparent;
+    background-color: #4CAF50 !important;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    display: inline-block;
+    border-radius: 50%;
+}
+
+/* Hover styles for cart buttons */
+.cart-button:hover {
+    background-color: #27e930 !important;
+}
+
+/* Active styles for cart buttons */
+.cart-button:active {
+    background-color: #367c39 !important;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+}
+
+/* Media queries for responsive design */
+@media screen and (max-width: 768px) {
+    /* Adjust padding for smaller screens */
+    .cart-button {
+        padding: 8px 16px;
+    }
+    .cart-button-container {
+        flex-direction: column; /* Change flex direction to column for smaller screens */
+        align-items: flex-start; /* Align items to the start of the column */
+    }
+}
+
+@media screen and (max-width: 576px) {
+    /* Adjust font size and padding for even smaller screens */
+    .cart-button {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+}

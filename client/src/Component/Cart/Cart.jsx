@@ -15,8 +15,7 @@ function Cart() {
       }
   })
   const json = await response.json();
-  setcart(json);
-  
+  setcart(json);  
   }
   useEffect(()=>{
     getallcart()
@@ -24,13 +23,16 @@ function Cart() {
   
   return (
     <>
-     {cart.map((item) => (
-          <div key={item.productId}>
-            <Cartfetch id={item.productId}/>      
-          </div>
-        ))
-      }
-    </>
+    {cart.length > 0 ? (
+      cart.map((item) => (
+        <div key={item.productId}>
+          <Cartfetch id={item.productId} quantity={item.quantity} cartid={item._id}/>      
+        </div>
+      ))
+    ) : (
+      <p>Your cart is empty.</p>
+    )}
+  </>
   );
 }
 

@@ -4,22 +4,22 @@ const Schema=mongoose.Schema
 const mobileschema=new Schema({
     model_name:{
         type:String,
-        requires:true
+        required: true
     },
     company_name:{
         type:String,
-        requires:true
+        required: true
     },
     description:{
         type:String,
-        requires:true
+        required: true
     },
     price:{
         type:Number,
-        requires:true
+        required: true
     },image:{
         type:String,
-        requires:true
+        required: true
     }
 })
 

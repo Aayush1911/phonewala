@@ -8,8 +8,10 @@ const cartschema=new Schema({
         ref:'mobile'
     },
     quantity:{
-        type:Number,
-        default:1
+        type:Number
+    },user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
     }
 })
 const cart=mongoose.model('cart',cartschema)

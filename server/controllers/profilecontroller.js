@@ -13,7 +13,7 @@ const addcontroller = async (req, res) => {
         const { address } = req.body;
         let newprofile = new profile({ userId: userId, name: name, email: email, address: address })
         newprofile = await newprofile.save()
-        return res.send("Added")
+        return res.send(newprofile)
 
     } catch (err) {
         console.log(err);

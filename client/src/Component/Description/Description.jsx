@@ -21,7 +21,25 @@ function Description() {
 
         fetchMobileData();
     }, [id]);
-
+    const isAuthenticated = localStorage.getItem('token');
+    const handlesubmit = async (e,id) => {
+        e.preventDefault();
+        if (!isAuthenticated) {
+          e.preventDefault();
+          alert('Please log in to access the cart.');
+        }
+        const host = 'http://localhost:4000';
+        const response = await fetch(`${host}/cart/add/${id}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "auth-token":localStorage.getItem('token')
+          },
+    
+        });
+        const json = await response.json();
+        console.log(json);
+      };
     const renderDescription = () => {
         if (!mobileData) return null;
 
@@ -54,8 +72,8 @@ function Description() {
                             <strong>Description:</strong>
                             {renderDescription()}
                         </div>
-                        <button style={{backgroundColor:"pink",color:"red",border:"1px solid red",display:"block",height:"40px",width:"150px",margin:"0 auto"}} className='icon'>Add to cart</button>
-                        <button style={{backgroundColor:"pink",color:"red",border:"1px solid red",display:"block",height:"40px",width:"150px",margin:"10px auto"}} className='icon'>Buy Now</button>
+                        <button  onClick={(e) => handlesubmit(e,id)}style={{backgroundColor:"pink",color:"red",border:"1px solid red",display:"block",height:"40px",width:"150px",margin:"0 auto"}} className='icon'>Add to cart</button>
+                        {/* <button style={{backgroundColor:"pink",color:"red",border:"1px solid red",display:"block",height:"40px",width:"150px",margin:"10px auto"}} className='icon'>Buy Now</button> */}
                     </div>
                 </div>
             ) : (

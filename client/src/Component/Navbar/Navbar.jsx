@@ -44,6 +44,19 @@ function Navbar() {
               >
                 Cart
               </Link>
+              <Link
+                className={`nav-link ${location.pathname === '/profile' ? 'active' : ''} `}
+                aria-current="page"
+                to="/profile"
+                onClick={(e) => {
+                  if (!isAuthenticated) {
+                    e.preventDefault();
+                    alert('Please log in to access the Profile.');
+                  }
+                }}
+              >
+                Profile
+              </Link>
             </ul>
             {!localStorage.getItem('token')?
       <form className="d-flex" role="search">

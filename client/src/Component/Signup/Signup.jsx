@@ -6,26 +6,31 @@ function Signup(props) {
     const navigate=useNavigate()
     const [credentails, setcredentails] = useState({email:'',password:'',name:'',cpassword:''});
     const handlesubmit = async (e) => {
-        e.preventDefault();
-        const {name,email,password}=credentails
-        const host = 'http://localhost:4000';
-        const response = await fetch(`${host}/auth/signup`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ name,email,password }),
-        });
-        const json = await response.json();
-        if(json){
-            localStorage.setItem('token',json.authtoken)
-            navigate('/')
-            // props.showalert('Signup Successfully','success')
-        }else{
-          //  props.showalert('Invalid Details','danger')
-        }
-        
-      };
+      e.preventDefault();
+      const { name, email, password } = credentails;
+      if (!name || !email || !password) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      
+      const host = 'http://localhost:4000';
+      const response = await fetch(`${host}/auth/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+      const json = await response.json();
+      if (json && json.error === 'User already exists') {
+        alert('This email is already registered. Please use a different email.');
+      } else if (json && json.authtoken) {
+        localStorage.setItem('token', json.authtoken);
+        navigate('/');
+      } else {
+        alert('Signup failed. Please try again.');
+      }
+    };
     
     
       const onchange = (e) => {

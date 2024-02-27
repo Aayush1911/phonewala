@@ -16,12 +16,17 @@ function Login(props) {
     });
     const json = await response.json();
     console.log(json);
-    if(json){
+    if(json && json.authtoken){
       localStorage.setItem('token',json.authtoken)
       // props.showalert('Loged in Successfully','success')
       navigate('/')
   }else{
     //  props.showalert('Invalid Details','danger')
+    if (response.status === 400) {
+      alert('Incorrect email or password. Please try again.');
+    } else {
+      alert('Login failed. Please try again later.');
+    }
   }
   };
 

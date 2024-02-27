@@ -5,6 +5,7 @@ import Signup from "./Component/Signup/Signup"
 import Homepage from "./Component/Homepage/Homepage"
 import Cart from "./Component/Cart/Cart"
 import Description from "./Component/Description/Description"
+import UserProfile from "./Component/Profile/UserProfile"
 
 function App() {
 
@@ -22,6 +23,9 @@ function App() {
         </Routes>
         <Routes>
           <Route path='/description/:id' element={<Description/>} />
+        </Routes>
+        <Routes>
+          <Route path='/profile' element={<UserProfile/>} />
         </Routes>
         <Routes>
           <Route path='/' element={<Homepage />} />

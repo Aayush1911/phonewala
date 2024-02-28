@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './Homepage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
-import { FaShoppingCart } from "react-icons/fa";
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { CCarousel } from '@coreui/react'
 import { CCarouselItem } from '@coreui/react'
@@ -47,8 +46,7 @@ function Homepage() {
 
   return (
     <>
-      {/* https://m.media-amazon.com/images/I/61cecOpZrxL._SX679_.jpg */}
-      <CCarousel controls indicators>
+      {/* <CCarousel controls indicators>
   <CCarouselItem>
     <CImage className="d-block w-100 " style={{height:"90vh"}} src='https://images-eu.ssl-images-amazon.com/images/G/31/img23/Wireless/Samsung/SamsungBAU/Eureka_Launch/Sale/8thFeb/2Ingress.jpg' alt="slide 1" />
     <CCarouselCaption className="d-none d-md-block">
@@ -67,7 +65,7 @@ function Homepage() {
       <h5>Samsung M14 5G</h5>
     </CCarouselCaption>
   </CCarouselItem>
-</CCarousel>
+</CCarousel> */}
     <div className="container">
       <div className="row my-4 mx-4">
         {mobileData.map((mobile) => (

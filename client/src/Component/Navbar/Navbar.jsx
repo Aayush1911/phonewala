@@ -16,7 +16,6 @@ function Navbar() {
   const isAuthenticated = localStorage.getItem('token');
 
   return (
-    
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
@@ -29,6 +28,18 @@ function Navbar() {
               <li className="nav-item">
               <Link className={`nav-link  ${location.pathname === '/' ? 'active' : ""}`} aria-current="page" to="/">Home</Link>
               </li>
+              <li className="nav-item dropdown mx-3">
+          <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Company
+          </a>
+          <ul className="dropdown-menu">
+                  <li><Link className="dropdown-item" to='/mobile/Samsung'>Samsung</Link></li>
+                  <li><Link className="dropdown-item" to='/mobile/Apple'>Apple</Link></li>
+                  <li><Link className="dropdown-item" to='/mobile/Realme'>Realme</Link></li>
+                  <li><Link className="dropdown-item" to='/mobile/OnePlus'>OnePlus</Link></li>
+                  <li><Link className="dropdown-item" to='/mobile/Vivo'>Vivo</Link></li>
+                </ul>
+        </li>
             </ul>
             <ul className="navbar-nav  mb-2 mb-lg-0 mx-3">
             <Link

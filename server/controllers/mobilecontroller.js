@@ -1,4 +1,5 @@
 const mobile = require("../models/mobile");
+// const mobile = require("../models/mobile");
 
 const addcontroller=async(req,res)=>{
     try{
@@ -18,6 +19,20 @@ const getallcontroller=async(req,res)=>{
     }catch(err){
         console.log(err);
     }
+}
+const getbycompanycontroller=async(req,res)=>{
+    try{
+    const company=req.params.category
+    if(company=='all'){
+        return res.json(await mobile.find())
+    }else{
+    let mobile_find=await mobile.find({company_name:company})
+    return res.json(mobile_find)
+    }
+    }catch(err){
+        console.log(err);
+    }
+
 }
 const getbyidcontroller=async(req,res)=>{
     try{
@@ -75,5 +90,5 @@ const deletecontroller=async(req,res)=>{
    }
 }
 module.exports={
-    addcontroller,getallcontroller,getbyidcontroller,updatecontroller,deletecontroller
+    addcontroller,getallcontroller,getbyidcontroller,updatecontroller,deletecontroller,getbycompanycontroller
 }

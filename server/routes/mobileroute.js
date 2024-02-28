@@ -6,5 +6,6 @@ router.get('/all',mobilecontroller.getallcontroller)
 router.get('/all/:id',mobilecontroller.getbyidcontroller)
 router.put('/update/:id',mobilecontroller.updatecontroller)
 router.delete('/delete/:id',mobilecontroller.deletecontroller)
+router.get('/:category',mobilecontroller.getbycompanycontroller)
 
 module.exports=router

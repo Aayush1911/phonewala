@@ -23,16 +23,11 @@ const getallcontroller=async(req,res)=>{
 const getbycompanycontroller=async(req,res)=>{
     try{
     const company=req.params.category
-    if(company=='all'){
-        return res.json(await mobile.find())
-    }else{
     let mobile_find=await mobile.find({company_name:company})
     return res.json(mobile_find)
-    }
     }catch(err){
         console.log(err);
-    }
-
+}
 }
 const getbyidcontroller=async(req,res)=>{
     try{

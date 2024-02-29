@@ -12,6 +12,9 @@ const cartschema=new Schema({
     },user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
+    },
+    price:{
+        type:Number
     }
 })
 const cart=mongoose.model('cart',cartschema)

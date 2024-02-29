@@ -3,14 +3,14 @@ import { useParams } from 'react-router-dom';
 import { FaShoppingCart } from "react-icons/fa";
 import './Description.css'
 
-function Description() {
+function Description(props) {
     const { id } = useParams();
     const [mobileData, setMobileData] = useState(null);
-
+    const host=import.meta.env.VITE_API
     useEffect(() => {
         const fetchMobileData = async () => {
             try {
-                let url = `http://localhost:4000/mobile/all/${id}`;
+                let url = `${host}/mobile/all/${id}`;
                 let data = await fetch(url);
                 let parsedData = await data.json();
                 setMobileData(parsedData);
@@ -28,7 +28,6 @@ function Description() {
           e.preventDefault();
           alert('Please log in to access the cart.');
         }
-        const host = 'http://localhost:4000';
         const response = await fetch(`${host}/cart/add/${id}`, {
           method: "POST",
           headers: {
@@ -38,7 +37,8 @@ function Description() {
     
         });
         const json = await response.json();
-        console.log(json);
+        // console.log(json);
+        props.showalert('Product has benn Added','success')
       };
     const renderDescription = () => {
         if (!mobileData) return null;

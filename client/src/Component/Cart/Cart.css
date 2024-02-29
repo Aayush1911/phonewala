@@ -33,7 +33,7 @@
   /* Default styles for cart buttons */
 .cart-button {
     background-color: transparent;
-    background-color: #4CAF50 !important;
+    background-color: #0591ee !important;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -49,7 +49,10 @@
 
 /* Hover styles for cart buttons */
 .cart-button:hover {
-    background-color: #27e930 !important;
+    background-color: blue !important;
+}
+.delete .cart-button:hover{
+    background-color: red !important
 }
 
 /* Active styles for cart buttons */

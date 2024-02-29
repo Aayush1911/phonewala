@@ -6,6 +6,7 @@ const getallcartcontroller=async (req,res)=>{
         // console.log("User ID:", req.user.id);
         const allCart = await cart.find({ user: req.user.id });
         // console.log("Cart items:", allCart);
+        // console.log(allCart.price);
         return res.json(allCart);
     }catch(err){
         console.log(err);
@@ -17,11 +18,11 @@ const addcart = async (req, res) => {
         const productId = req.params.id;
         const product = await mobile.findById(productId);
         const user = req.user.id; // Get the authenticated user ID
-
+        const price=product.price
         if (!product) {
             return res.status(404).send('Product does not exist');
         }
-        
+        // console.log(price);        
         let quantity = 1;
 
         let existingCartItem = await cart.findOne({ productId, user });
@@ -33,7 +34,7 @@ const addcart = async (req, res) => {
             return res.json('Cart item quantity updated');
         } else {
             // If cart item does not exist, create a new one
-            const newCartItem = new cart({ productId, quantity, user });
+            const newCartItem = new cart({ productId, quantity, user,price });
             await newCartItem.save();
             return res.json('New item added to the cart');
         }
@@ -100,7 +101,7 @@ const deletecontroller=async(req,res)=>{
             return res.status(401).json({ message: 'Unauthorized' });
         }
         deletecart=await cart.findByIdAndDelete(req.params.id)
-        return res.status(200).send('Deleted');
+        return res.send('deleted');
     }catch(err){
         console.log(err);
     }

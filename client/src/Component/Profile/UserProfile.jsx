@@ -5,7 +5,28 @@ const UserProfile = () => {
     const [profile, setProfile] = useState(null);
     const [error, setError] = useState('');
     const [addressPromptShown, setAddressPromptShown] = useState(false);
+    const[totalcart,settotalcart]=useState(0)
+    const host=import.meta.env.VITE_API
 
+    const getallcart = async () => {
+        try {
+          let url = `${host}/cart/items`;
+          let data = await fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "auth-token":localStorage.getItem('token')
+            },
+          });
+          let parsedata = await data.json();
+          settotalcart(parsedata)
+        } catch (error) {
+          console.error('Error fetching mobile data:', error);
+        }
+      };
+      useEffect(()=>{
+        getallcart()
+      })
     useEffect(() => {
         const fetchProfile = async () => {
             try {
@@ -14,15 +35,15 @@ const UserProfile = () => {
                     throw new Error('Authentication token not found.');
                 }
 
-                let addressToSend = localStorage.getItem('address');
+                let addressToSend = sessionStorage.getItem('address');
                 if (!addressToSend && !addressPromptShown) {
                     addressToSend = prompt('Please enter your address:');
                     setAddressPromptShown(true);
                     if (!addressToSend) return; // If user cancels the prompt
-                    localStorage.setItem('address', addressToSend);
+                    sessionStorage.setItem('address', addressToSend);
                 }
 
-                const response = await axios.post(`http://localhost:4000/profile/add`, { address: addressToSend }, {
+                const response = await axios.post(`${host}/profile/add`, { address: addressToSend }, {
                     headers: {
                         "auth-token": token 
                     }
@@ -49,6 +70,8 @@ const UserProfile = () => {
                     <p><strong>Name:</strong> {profile.name}</p>
                     <p><strong>Email:</strong> {profile.email}</p>
                     <p><strong>Address:</strong> {profile.address}</p>
+                    <p><strong>Cart Items:</strong> {totalcart}</p>
+
                 </div>
             )}
         </div>

@@ -10,11 +10,13 @@ function Cartfetch(props) {
     const { id } = props;
     const [mobileData, setMobileData] = useState(null);
     const [quantity, setQuantity] = useState(props.quantity);
+    const host=import.meta.env.VITE_API
+
 
     useEffect(() => {
         const fetchMobileData = async () => {
             try {
-                let url = `http://localhost:4000/mobile/all/${id}`;
+                let url = `${host}/mobile/all/${id}`;
                 let data = await fetch(url);
                 let parsedData = await data.json();
                 setMobileData(parsedData);
@@ -28,7 +30,6 @@ function Cartfetch(props) {
 
     const handleAdd = async (e) => {
         e.preventDefault();
-        const host = 'http://localhost:4000';
         const response = await fetch(`${host}/cart/add/${id}`, {
             method: "POST",
             headers: {
@@ -42,7 +43,6 @@ function Cartfetch(props) {
 
     const handleSubtract = async (e) => {
         e.preventDefault();
-        const host = 'http://localhost:4000';
         const response = await fetch(`${host}/cart/sub/${props.cartid}`, {
             method: "POST",
             headers: {
@@ -58,7 +58,8 @@ function Cartfetch(props) {
 
     const handleDelete = async (e) => {
         e.preventDefault();
-        const host = 'http://localhost:4000';
+        console.log('Delete button clicked'); // Add this line for debugging
+
         const response = await fetch(`${host}/cart/delete/${props.cartid}`, {
             method: "DELETE",
             headers: {
@@ -66,7 +67,8 @@ function Cartfetch(props) {
                 "auth-token": localStorage.getItem('token')
             },
         });
-        const json = await response.json();
+        // const json = await response.json();
+        props.showalert('Product has been deleted','danger')
         // console.log(json);         
     };
 
@@ -86,15 +88,17 @@ function Cartfetch(props) {
                             <p className="card-text">Price: {totalPrice}</p>
                             {/* <p className="card-text">Total Price: {totalPrice}</p> */}
                             <div className="cart-button-container">
-                                <button className="cart-button" onClick={handleAdd}>
+                                <button className="cart-button btn btn-primary" onClick={handleAdd}>
                                     <IoAdd />
                                 </button>
                                 <p className="card-text mx-2 my-1">Quantity: {quantity}</p>
-                                <button className="cart-button" onClick={handleSubtract}>
+                                <button className="cart-button btn btn-primary" onClick={handleSubtract}>
                                     <MdOutlineHorizontalRule />
                                 </button>
                             </div>
-                            <button className="cart-button" onClick={handleDelete}><MdDelete /></button>
+                            <div className='delete'>
+                            <button className="cart-button  btn btn-primary my-2" onClick={handleDelete}><MdDelete /></button>
+                            </div>
                         </div>
                     </div>
                 </div>

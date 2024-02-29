@@ -4,9 +4,9 @@ import './Login.css'
 
 function Login(props) {
     let navigate=useNavigate()
+    const host=import.meta.env.VITE_API
   const handlesubmit = async (e) => {
     e.preventDefault();
-    const host = 'http://localhost:4000';
     const response = await fetch(`${host}/auth/login`, {
       method: "POST",
       headers: {
@@ -15,17 +15,17 @@ function Login(props) {
       body: JSON.stringify({ email:credentails.email, password:credentails.password }),
     });
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
     if(json && json.authtoken){
       localStorage.setItem('token',json.authtoken)
-      // props.showalert('Loged in Successfully','success')
+      props.showalert('Loged in Successfully','success')
       navigate('/')
   }else{
-    //  props.showalert('Invalid Details','danger')
+     props.showalert('Invalid Details','danger')
     if (response.status === 400) {
-      alert('Incorrect email or password. Please try again.');
+      props.showalert('Incorrect email or password. Please try again.','danger');
     } else {
-      alert('Login failed. Please try again later.');
+      props.showalert('Login failed. Please try again later.'),'danger';
     }
   }
   };

@@ -12,8 +12,7 @@ function Signup(props) {
         alert('Please fill in all required fields.');
         return;
       }
-      
-      const host = 'http://localhost:4000';
+            const host=import.meta.env.VITE_API
       const response = await fetch(`${host}/auth/signup`, {
         method: "POST",
         headers: {
@@ -23,7 +22,7 @@ function Signup(props) {
       });
       const json = await response.json();
       if (json && json.error === 'User already exists') {
-        alert('This email is already registered. Please use a different email.');
+        props.showalert('This email is already registered. Please use a different email.','danger');
       } else if (json && json.authtoken) {
         localStorage.setItem('token', json.authtoken);
         navigate('/');

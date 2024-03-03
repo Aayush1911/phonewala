@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Cartfetch from './Cartfetch';
-
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 function Cart(props) {
   const host=import.meta.env.VITE_API
   const [cart, setCart] = useState([]);
@@ -48,7 +49,9 @@ function Cart(props) {
   return (
     <>
       {loading ? (
-        <p>Loading...</p>
+        <Box sx={{ display: 'flex', justifyContent: 'center', minHeight: '100vh', alignItems: 'center' }}>
+        <CircularProgress />
+      </Box>
       ) : error ? (
         <p>Error: {error}</p>
       ) : cart.length > 0 ? (
@@ -59,7 +62,7 @@ function Cart(props) {
             </div>
           ))}
           <p className='mx-5 my-4'><b>Total Price: </b>{totalPrice.toFixed(2)}</p> {/* Ensure totalPrice is formatted correctly */}
-          <div className="text-center">
+          <div className="text-center" style={{height:"15vh"}}>
           <button type="button" className="btn btn-primary" onClick={()=>alert(`Payment recieved of ${totalPrice}.`)}>Buy now</button>
           </div>
         </>

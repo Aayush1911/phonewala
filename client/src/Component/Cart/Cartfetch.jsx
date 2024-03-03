@@ -39,6 +39,7 @@ function Cartfetch(props) {
         });
         const json = await response.json();
         setQuantity(prevQuantity => prevQuantity + 1);
+        props.showalert('Product has benn Incremented','success')
     };
 
     const handleSubtract = async (e) => {
@@ -54,6 +55,8 @@ function Cartfetch(props) {
         if (quantity > 0) {
             setQuantity(prevQuantity => prevQuantity - 1);
         }
+        props.showalert('Product has been Decremented','success')
+
     };
 
     const handleDelete = async (e) => {
@@ -85,7 +88,7 @@ function Cartfetch(props) {
                     <div className="col-md-8">
                         <div className="card-body">
                             <h5 className="card-title">{mobileData.model_name}</h5>
-                            <p className="card-text">Price: {totalPrice}</p>
+                            <p className="card-text">Price: {mobileData.price}</p>
                             {/* <p className="card-text">Total Price: {totalPrice}</p> */}
                             <div className="cart-button-container">
                                 <button className="cart-button btn btn-primary" onClick={handleAdd}>

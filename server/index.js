@@ -10,7 +10,7 @@ app.listen(port,()=>{
     console.log('App listening on port 4000');
 })
 app.use(cors({
-    orgin:["http://localhost:5173/"],
+    orgin:["https://phonewala.vercel.app/"],
     methods:["POST","GET","DELETE"],
     credentials:true
   }))

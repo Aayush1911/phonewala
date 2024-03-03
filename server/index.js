@@ -14,6 +14,9 @@ app.use(cors({
     methods:["POST","GET","DELETE"],
     credentials:true
   }))
+app.get('/',(req,res)=>{
+  res.send('app working')
+})
 app.use('/auth',require('./routes/authroute'));
 app.use('/mobile',require('./routes/mobileroute'));
 app.use('/cart',require('./routes/cartroute'))

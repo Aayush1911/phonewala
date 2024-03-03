@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 // main.js or main.ts
 import 'bootstrap/dist/js/bootstrap.bundle';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 function Navbar(props) {
   let navigate = useNavigate()
@@ -11,8 +11,9 @@ function Navbar(props) {
   const handlelogout = () => {
     localStorage.removeItem('token')
     // alert('Logged out successfully!');
-    navigate('/login')
+    navigate('/')
   }
+  const {category}=useParams()
   const [totalcart, settotalcart] = useState(0)
   const isAuthenticated = localStorage.getItem('token');
   const getallcart = async () => {
@@ -55,56 +56,19 @@ function Navbar(props) {
               <li className="nav-item">
                 <Link  className={`nav-link  ${location.pathname === '/' ? 'active' : ""}`}
                  aria-current="page"
-                 onClick={(e) => {
-                  if (!isAuthenticated) {
-                    e.preventDefault();
-                    props.showalert('Please log in to access the Phonewala.', 'danger');
-                    navigate('/login')
-                  }
-                }}
                   to="/">Home
                 </Link>
               </li>
-              <li className="nav-item dropdown mx-3">
-                <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <li className={`nav-item dropdown mx-3 ${location.pathname.startsWith('/mobile') ? 'active' : ''}`}>
+                <Link className={`nav-link dropdown-toggle `}  role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Company
-                </a>
-                <ul className="dropdown-menu">
-                  <li><Link onClick={(e) => {
-                    if (!isAuthenticated) {
-                      e.preventDefault();
-                      props.showalert('Please log in to access the Phonewala.', 'danger');
-                      navigate('/login')
-                    }
-                  }} className="dropdown-item " to='/mobile/Samsung' >Samsung</Link></li>
-                  <li><Link onClick={(e) => {
-                    if (!isAuthenticated) {
-                      e.preventDefault();
-                      props.showalert('Please log in to access the Phonewala.', 'danger');
-                      navigate('/login')
-                    }
-                  }} className="dropdown-item " to='/mobile/Apple'>Apple</Link></li>
-                  <li><Link onClick={(e) => {
-                    if (!isAuthenticated) {
-                      e.preventDefault();
-                      props.showalert('Please log in to access the Phonewala.', 'danger');
-                      navigate('/login')
-                    }
-                  }} className="dropdown-item" to='/mobile/Real me'>Realme</Link></li>
-                  <li><Link onClick={(e) => {
-                    if (!isAuthenticated) {
-                      e.preventDefault();
-                      props.showalert('Please log in to access the Phonewala.', 'danger');
-                      navigate('/login')
-                    }
-                  }} className="dropdown-item" to='/mobile/OnePlus'>OnePlus</Link></li>
-                  <li><Link onClick={(e) => {
-                    if (!isAuthenticated) {
-                      e.preventDefault();
-                      props.showalert('Please log in to access the Phonewala.', 'danger');
-                      navigate('/login')
-                    }
-                  }} className="dropdown-item" to='/mobile/Vivo'>Vivo</Link></li>
+                </Link>
+                <ul className={`dropdown-menu`}>
+                  <li><Link  className={`dropdown-item`} to='/mobile/Samsung' >Samsung</Link></li>
+                  <li><Link  className={`dropdown-item` }to='/mobile/Apple'>Apple</Link></li>
+                  <li><Link  className={`dropdown-item`} to='/mobile/Real me'>Realme</Link></li>
+                  <li><Link  className={`dropdown-item`} to='/mobile/OnePlus'>OnePlus</Link></li>
+                  <li><Link  className={`dropdown-item` }to='/mobile/Vivo'>Vivo</Link></li>
                 </ul>
               </li>
             </ul>

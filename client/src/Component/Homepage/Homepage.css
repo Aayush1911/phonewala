@@ -1,57 +1,62 @@
-.card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-body {
-    padding: 20px;
-  }
-  
-  .card-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .card-text {
-    margin-bottom: 10px;
-  }
+body{
+  background-color: rgb(235, 234, 234);
+}
+.card{
+  background-color: rgb(253, 253, 252);
+}
   .link-style {
     text-decoration: none;
     color: inherit; /* Inherit the color from the parent element */
   }
-  .icon {
-    background-color: transparent;
-    border: none;
-    color: #ff1493;
-    font-size: 24px;
-    cursor: pointer;
-    transition: color 0.3s ease;
-  }
-  
-  .icon:hover {
-    color: #ff69b4;
-  }
-  .card {
-    font-family: 'Roboto', sans-serif; /* Example font family */
-    font-size: 16px;
-  }
-  
-  .card-title {
-    font-size: 20px;
-    font-weight: bold;
-  }
-  
-  .card-text {
-    font-size: 16px;
-  }
-  
-  .icon {
-    font-size: 24px;
-  }
+.card-title {
+  font-size: 1.2rem; /* Adjust as needed */
+  font-weight: 500; /* Adjust as needed */
+  font-family: Arial, sans-serif; /* Adjust as needed */
+}
+
+.card-text {
+  font-size: 1rem; /* Adjust as needed */
+  font-family: Arial, sans-serif; /* Adjust as needed */
+}
+
+.footer h5 {
+  font-size: 1.2rem; /* Adjust as needed */
+  font-weight: 600; /* Adjust as needed */
+  font-family: Arial, sans-serif; /* Adjust as needed */
+}
+.footer ul li a {
+  font-size: 1rem; /* Adjust as needed */
+  font-family: Arial, sans-serif; /* Adjust as needed */
+}
+
+.icon {
+  font-size: 1.2rem; /* Adjust as needed */
+  font-family: Arial, sans-serif; /* Adjust as needed */
+  /* Add any additional styling for the icon button */
+}
+/* Homepage.css */
+
+.card {
+  transition: transform 0.3s ease; /* Add smooth transition effect */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Move the card up by 5 pixels on hover */
+}
+.foot-panel4{
+  background-color: #0f1111;
+  color: white;
+  text-align: center;
+  height: 70px;
+  padding-top: 20px;
+
+}
+.pages{
+  font-size: 1rem;
+}
+.copyright{
+  font-size: 0.8rem;
+}
+.footer a {
+  text-decoration: none; /* Remove underline from links */
+}

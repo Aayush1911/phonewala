@@ -60,7 +60,7 @@ function Cart(props) {
           ))}
           <p className='mx-5 my-4'><b>Total Price: </b>{totalPrice.toFixed(2)}</p> {/* Ensure totalPrice is formatted correctly */}
           <div className="text-center">
-          <button type="button" className="btn btn-primary" onClick={()=>props.showalert(`Payment recieved of ${totalPrice}.`,'success')}>Buy now</button>
+          <button type="button" className="btn btn-primary" onClick={()=>alert(`Payment recieved of ${totalPrice}.`)}>Buy now</button>
           </div>
         </>
       ) : (

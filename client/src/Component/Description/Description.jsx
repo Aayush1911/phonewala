@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { FaShoppingCart } from "react-icons/fa";
 import './Description.css'
 
 function Description(props) {
@@ -26,8 +25,8 @@ function Description(props) {
         e.preventDefault();
         if (!isAuthenticated) {
           e.preventDefault();
-          alert('Please log in to access the cart.');
-        }
+          props.showalert('Please log in to access the cart.','danger');
+        }else{
         const response = await fetch(`${host}/cart/add/${id}`, {
           method: "POST",
           headers: {
@@ -39,6 +38,7 @@ function Description(props) {
         const json = await response.json();
         // console.log(json);
         props.showalert('Product has benn Added','success')
+    }
       };
     const renderDescription = () => {
         if (!mobileData) return null;
@@ -66,8 +66,8 @@ function Description(props) {
                     <div className="col-md-8">
                         <h2>{mobileData.model_name}</h2>
                         {/* <p>{mobileData._id}</p> */}
-                        <p><strong>Company:</strong> {mobileData.company_name}</p>
-                        <p><strong>Price:</strong> {mobileData.price}</p>
+                        <p><strong>Company : </strong> {mobileData.company_name}</p>
+                        <p><strong>Price : ₹</strong> {mobileData.price}</p>
                         <div>
                             <strong>Description:</strong>
                             {renderDescription()}

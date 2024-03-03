@@ -58,7 +58,7 @@ function Cartfetch(props) {
 
     const handleDelete = async (e) => {
         e.preventDefault();
-        console.log('Delete button clicked'); // Add this line for debugging
+        // console.log('Delete button clicked'); // Add this line for debugging
 
         const response = await fetch(`${host}/cart/delete/${props.cartid}`, {
             method: "DELETE",

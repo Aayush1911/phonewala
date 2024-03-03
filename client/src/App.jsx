@@ -10,45 +10,32 @@ import { useState } from "react"
 import Alert from "./Component/Alert/Alert"
 
 function App() {
-  const[alert,setalert]=useState(null)
+  const [alert, setAlert] = useState(null)
 
-  const showalert=(message,type)=>{
-    setalert({
-      message:message,
-      type:type
+  const showAlert = (message, type) => {
+    setAlert({
+      message: message,
+      type: type
     })
-    setTimeout(()=>{
-      setalert(null)
-    },2000)
+    setTimeout(() => {
+      setAlert(null)
+    }, 2000)
   }
-  return (
-    <><Router>
-      <Navbar showalert={showalert} />
-      <Alert alert={alert}/>
-        <Routes>
-          <Route path='/login' element={<Login showalert={showalert}/>} />
-        </Routes>
-        <Routes>
-          <Route path='/signup' element={<Signup showalert={showalert} />} />
-        </Routes>
-        <Routes>
-          <Route path='/cart' element={<Cart showalert={showalert}/>} />
-        </Routes>
-        <Routes>
-          <Route path='/description/:id' element={<Description showalert={showalert}/>} />
-        </Routes>
-        <Routes>
-          <Route path='/profile' element={<UserProfile/>} />
-        </Routes>
-        <Routes>
-          <Route path='/mobile/:category' element={<Homepage showalert={showalert} />} />
-        </Routes>
-        <Routes>
-          <Route path='/' element={<Homepage showalert={showalert} />} />
-        </Routes>
-      </Router>
 
-    </>
+  return (
+    <Router>
+      <Navbar showalert={showAlert} />
+      <Alert alert={alert}/>
+      <Routes>
+        <Route path='/login' element={<Login showalert={showAlert} />} />
+        <Route path='/signup' element={<Signup showalert={showAlert} />} />
+        <Route path='/cart' element={<Cart showalert={showAlert} />} />
+        <Route path='/description/:id' element={<Description showalert={showAlert} />} />
+        <Route path='/profile' element={<UserProfile />} />
+        <Route path='/mobile/:category' element={<Homepage showalert={showAlert} />} />
+        <Route path='/' element={<Homepage showalert={showAlert} />} />
+      </Routes>
+    </Router>
   )
 }
 

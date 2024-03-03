@@ -4,11 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import { Link, useParams } from 'react-router-dom';
 import { CCarousel, CCarouselItem, CCarouselCaption, CImage } from '@coreui/react';
+import { FaArrowAltCircleUp } from "react-icons/fa";
+
 
 function Homepage(props) {
   const { category } = useParams();
   const [mobileData, setMobileData] = useState([]);
   const host=import.meta.env.VITE_API
+
   const getallmobile = async () => {
     if(category){
     try {
@@ -51,8 +54,8 @@ function Homepage(props) {
     e.preventDefault();
     if (!isAuthenticated) {
       e.preventDefault();
-      alert('Please log in to access the cart.');
-    }
+      props.showalert('Please log in to access the cart.','danger');
+    }else{
     const response = await fetch(`${host}/cart/add/${id}`, {
       method: "POST",
       headers: {
@@ -64,6 +67,7 @@ function Homepage(props) {
     props.showalert("Product has benn Added","success")
     // console.log(json);
     // window.location.reload(); 
+  }
   };
 
   return (
@@ -84,9 +88,7 @@ function Homepage(props) {
                     <p className="card-title" style={{ fontWeight: "400" }}><strong>Model : </strong>{mobile.model_name}</p>
                     <p className="card-text"><strong>Company :</strong> {mobile.company_name}</p>
                     <p className="card-text"><b>Price : ₹</b>{mobile.price}</p>
-                    <Link to={'/cart'} style={{ textDecoration: 'none', color: 'black' }}>
                       <button onClick={(e) => handlesubmit(e, mobile._id)} style={{ margin: " 0 auto", color: "red", display: "block", height: "40px", fontWeight: "500", fontSize: "1.2rem", border: "0.5px solid white", backgroundColor: "pink", margin: "0 auto" }} className='icon'>Add to cart</button>
-                    </Link>
                   </div>
                 </Link>
               </div>
@@ -94,6 +96,7 @@ function Homepage(props) {
           ))}
         </div>
       </div>
+      
       <footer className="footer mt-auto py-3 bg-dark text-white">
         <div className="container">
           <div className="row">
@@ -126,7 +129,7 @@ function Homepage(props) {
               <h5 className="text-uppercase">Phonewala Payment Products</h5>
               <ul className="list-unstyled mb-0">
                 <li>
-                  <Link className="text-white">Amazon Business Card</Link>
+                  <Link className="text-white">Phonewala Business Card</Link>
                 </li>
                 <li>
                   <Link className="text-white">Shop with Points</Link>
@@ -145,8 +148,18 @@ function Homepage(props) {
               </ul>
             </div>
           </div>
+        </div><br />
+        </footer>
+        <div class="foot-panel4">
+        <div class="pages">
+            <a>Conditions of Use</a>
+             <a>Privacy Notice</a>
+              <a>Your Ads Privacy Choices</a>
         </div>
-      </footer>
+        <div class="copyright">
+            © 2023-2024, Phonewala.com, Inc. or its affiliates
+        </div>
+    </div>
     </>
   );
 }

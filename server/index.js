@@ -15,11 +15,11 @@ connectToMongo();
 app.use(express.json());
 app.use(cookieParser());
 app.use(session({
-  secret: 'sfsedsdvsvjhffbdhsdfnfnfbdncbd', // Replace with a strong secret key
+  secret: 'sfsedsdvsvjhffbdhsdfnfnfbdncbd', 
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true,    httpOnly: true, sameSite:'None'
-  } // Set to true in production with HTTPS
+  // cookie: { secure: true,    httpOnly: true,sameSite:'None'
+  // } 
 }));
 
 // CORS setup

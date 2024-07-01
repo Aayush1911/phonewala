@@ -28,6 +28,7 @@ const signupcontroller = async (req, res) => {
         res.cookie('otp', encryptedotp, {
             httpOnly: true,
             secure: true,
+            sameSite: 'None',
             maxAge: 5 * 60 * 1000,
         });
         req.session.signupData = { name, email, password };

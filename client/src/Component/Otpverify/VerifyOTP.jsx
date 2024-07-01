@@ -30,7 +30,7 @@ const VerifyOTP = () => {
         setSuccessMessage(json.message);
         setError('');
         // Store authtoken in cookies
-        Cookies.set('token', json.authtoken, { expires: 10 });
+        Cookies.set('token', json.authtoken, { expires: 10, secure: true, sameSite: 'None'  });
         navigate('/')
         // Handle successful verification, e.g., redirect to dashboard
       } else {

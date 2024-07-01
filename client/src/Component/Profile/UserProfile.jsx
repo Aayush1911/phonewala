@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const UserProfile = () => {
     const [profile, setProfile] = useState(null);
@@ -15,7 +16,7 @@ const UserProfile = () => {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              "auth-token":localStorage.getItem('token')
+              "auth-token":Cookies.get('token')
             },
           });
           let parsedata = await data.json();
@@ -30,7 +31,7 @@ const UserProfile = () => {
     useEffect(() => {
         const fetchProfile = async () => {
             try {
-                const token = localStorage.getItem('token');
+                const token = Cookies.get('token');
                 if (!token) {
                     throw new Error('Authentication token not found.');
                 }

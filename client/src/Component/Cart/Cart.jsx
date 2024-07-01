@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Cartfetch from './Cartfetch';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+
+import Cookies from 'js-cookie';
+
+
 function Cart(props) {
   const host=import.meta.env.VITE_API
   const [cart, setCart] = useState([]);
@@ -14,7 +18,7 @@ function Cart(props) {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": localStorage.getItem('token')
+          "auth-token": Cookies.get('token')
         }
       });
       const json = await response.json();

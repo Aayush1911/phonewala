@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import './Signup.css'
+import Cookies from 'js-cookie';
 
 function Signup(props) {
     const navigate=useNavigate()
@@ -12,22 +13,26 @@ function Signup(props) {
         alert('Please fill in all required fields.');
         return;
       }
-            const host=import.meta.env.VITE_API
+      const host=import.meta.env.VITE_API
       const response = await fetch(`${host}/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": "true"
         },
         body: JSON.stringify({ name, email, password }),
+        credentials: 'include' // Include cookies in the request
       });
       const json = await response.json();
       if (json && json.error === 'User already exists') {
         props.showalert('This email is already registered. Please use a different email.','danger');
-      } else if (json && json.authtoken) {
-        localStorage.setItem('token', json.authtoken);
-        navigate('/');
-      } else {
-        alert('Signup failed. Please try again.');
+      }
+        // localStorage.setItem('token', json.authtoken);
+        // Cookies.set('token', json.authtoken, { expires: 10 }); // Token will expire in 10 days
+        else {
+          // Store OTP in cookie after successful signup
+          // Cookies.set('otp', json.otp, { secure: true, sameSite: 'strict' });
+          navigate('/verify');
       }
     };
     

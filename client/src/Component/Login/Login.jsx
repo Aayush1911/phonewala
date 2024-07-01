@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import './Login.css'
+import Cookies from 'js-cookie';
+
 
 function Login(props) {
     let navigate=useNavigate()
     const host=import.meta.env.VITE_API
+
   const handlesubmit = async (e) => {
     e.preventDefault();
     const response = await fetch(`${host}/auth/login`, {
@@ -17,7 +20,8 @@ function Login(props) {
     const json = await response.json();
     // console.log(json);
     if(json && json.authtoken){
-      localStorage.setItem('token',json.authtoken)
+      // localStorage.setItem('token',json.authtoken)
+      Cookies.set('token', json.authtoken, { expires: 10 }); // Token will expire in 10 days
       props.showalert('Loged in Successfully','success')
       navigate('/')
   }else{

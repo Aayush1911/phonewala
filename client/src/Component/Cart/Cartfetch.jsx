@@ -4,6 +4,7 @@ import { IoAdd } from "react-icons/io5";
 import { MdOutlineHorizontalRule } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 function Cartfetch(props) {
     const navigate = useNavigate();
@@ -34,7 +35,7 @@ function Cartfetch(props) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": localStorage.getItem('token')
+                "auth-token": Cookies.get('token')
             },
         });
         const json = await response.json();
@@ -48,7 +49,7 @@ function Cartfetch(props) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": localStorage.getItem('token')
+                "auth-token": Cookies.get('token')
             },
         });
         const json = await response.json();
@@ -67,7 +68,7 @@ function Cartfetch(props) {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": localStorage.getItem('token')
+                "auth-token": Cookies.get('token')
             },
         });
         // const json = await response.json();

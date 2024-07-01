@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './Description.css'
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import Cookies from 'js-cookie';
+
 
 function Description(props) {
     const { id } = useParams();
     const [mobileData, setMobileData] = useState(null);
+    const [loading, setLoading] = useState(true); // Initially set loading to true
     const host=import.meta.env.VITE_API
     useEffect(() => {
         const fetchMobileData = async () => {
@@ -13,6 +18,7 @@ function Description(props) {
                 let data = await fetch(url);
                 let parsedData = await data.json();
                 setMobileData(parsedData);
+                setLoading(false)
             } catch (error) {
                 console.error('Error fetching mobile data:', error);
             }
@@ -20,7 +26,7 @@ function Description(props) {
 
         fetchMobileData();
     }, [id]);
-    const isAuthenticated = localStorage.getItem('token');
+    const isAuthenticated = Cookies.get('token');
     const handlesubmit = async (e,id) => {
         e.preventDefault();
         if (!isAuthenticated) {
@@ -31,7 +37,7 @@ function Description(props) {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "auth-token":localStorage.getItem('token')
+            "auth-token":Cookies.get('token')
           },
     
         });
@@ -57,6 +63,15 @@ function Description(props) {
     };
 
     return (
+        <>
+         {loading && ( // Display loading indicator if loading is true
+        <div className='mx-4'>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <CircularProgress />
+          </Box>
+        </div>
+      )}
+      {!loading &&
         <div className="container mt-4">
             {mobileData ? (
                 <div className="row my-4">
@@ -80,6 +95,8 @@ function Description(props) {
                 <p>Loading...</p>
             )}
         </div>
+        }
+        </>
     );
 }
 

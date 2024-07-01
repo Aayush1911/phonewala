@@ -7,6 +7,8 @@ import { CCarousel, CCarouselItem, CCarouselCaption, CImage } from '@coreui/reac
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import Cookies from 'js-cookie';
+
 
 function Homepage(props) {
   const { category } = useParams();
@@ -47,7 +49,7 @@ function Homepage(props) {
     setLoading(false); // Set loading to false when fetch completes
   };
 
-  const isAuthenticated = localStorage.getItem('token');
+  const isAuthenticated = Cookies.get('token');
 
   useEffect(() => {
     getallmobile();
@@ -63,7 +65,7 @@ function Homepage(props) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "auth-token": localStorage.getItem('token')
+          "auth-token": Cookies.get('token')
         },
       });
       const json = await response.json();
@@ -86,7 +88,7 @@ function Homepage(props) {
             <div className="row my-4 mx-4">
               {mobileData.map((mobile) => (
                 <div key={mobile._id} className="col-md-4">
-                  <div className="card mb-3">
+                  <div className="card mb-3 items">
                     <Link to={`/description/${mobile._id}`} className="link-style">
                       <img
                         src={mobile.image}
@@ -95,10 +97,10 @@ function Homepage(props) {
                         style={{ width: '100%', height: '300px' }}
                       />
                       <div className="card-body">
-                        <p className="card-title" style={{ fontWeight: "400" }}><strong>Model : </strong>{mobile.model_name}</p>
-                        <p className="card-text"><strong>Company :</strong> {mobile.company_name}</p>
-                        <p className="card-text"><b>Price : ₹</b>{mobile.price}</p>
-                        <button onClick={(e) => handlesubmit(e, mobile._id)} style={{ margin: " 0 auto", color: "red", display: "block", height: "40px", fontWeight: "500", fontSize: "1.2rem", border: "0.5px solid white", backgroundColor: "pink", margin: "0 auto" }} className='icon'>Add to cart</button>
+                        <p className="card-title" style={{ fontWeight: "400" }}><strong></strong>{mobile.model_name}</p>  
+                        {/* <p className="card-text"><strong>Company :</strong> {mobile.company_name}</p> */}
+                        <p className="card-text"><b>₹</b>{mobile.price}</p>
+                        <button onClick={(e) => handlesubmit(e, mobile._id)} style={{ margin: " 0 auto", color: "red", display: "block", height: "40px", fontWeight: "500", fontSize: "1.2rem", border: "0.5px solid white", backgroundColor: "pink", margin: "0 auto" ,borderRadius:"10px" }} className='icon'>Add to cart</button>
                       </div>
                     </Link>
                   </div>

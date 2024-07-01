@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 // main.js or main.ts
+import Cookies from 'js-cookie';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 
@@ -9,15 +10,15 @@ function Navbar(props) {
   let location = useLocation();
   const host=import.meta.env.VITE_API
   const handlelogout = () => {
-    localStorage.removeItem('token')
+    Cookies.remove('token')
     // alert('Logged out successfully!');
     navigate('/')
   }
   const {category}=useParams()
   const [totalcart, settotalcart] = useState(0)
-  const isAuthenticated = localStorage.getItem('token');
+  const isAuthenticated = Cookies.get('token');
   const getallcart = async () => {
-    if(!localStorage.getItem('token')){
+    if(!Cookies.get('token')){
       settotalcart(0)
     }else{
       try {
@@ -26,7 +27,7 @@ function Navbar(props) {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "auth-token": localStorage.getItem('token')
+            "auth-token":Cookies.get('token')
           },
         });
         let parsedata = await data.json();
@@ -101,7 +102,7 @@ function Navbar(props) {
                 Profile
               </Link>
             </ul>
-            {!localStorage.getItem('token') ?
+            {!Cookies.get('token') ?
               <form className="d-flex" role="search">
                 <Link className="btn btn-primary mx-1" to='/login' role="button">Login</Link>
                 <Link className="btn btn-primary mx-1" to='/signup' role="button">Signup</Link>

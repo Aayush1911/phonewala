@@ -6,7 +6,7 @@ dotenv.config({path:'./.env'})
 const mongoURL=process.env.MONGOURL
 
 const connectToMongo=()=>{
-        mongoose.connect(mongoURL)
+        mongoose.connect(mongoURL,)
         console.log("Connected to mongoose Sucessfully")
 }
 

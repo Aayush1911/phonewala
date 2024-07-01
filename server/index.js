@@ -18,7 +18,7 @@ app.use(session({
   secret: 'sfsedsdvsvjhffbdhsdfnfnfbdncbd', // Replace with a strong secret key
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true } // Set to true in production with HTTPS
+  cookie: { secure: false } // Set to true in production with HTTPS
 }));
 
 // CORS setup

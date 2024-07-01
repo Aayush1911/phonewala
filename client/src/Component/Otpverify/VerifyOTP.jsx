@@ -5,6 +5,7 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router';
 
 const VerifyOTP = () => {
+    const host=import.meta.env.VITE_API
   const [otp, setOTP] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -15,7 +16,7 @@ const VerifyOTP = () => {
     e.preventDefault();
     
     try {
-      const response = await fetch('http://localhost:4000/auth/verify', {
+      const response = await fetch(`${host}/auth/verify`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

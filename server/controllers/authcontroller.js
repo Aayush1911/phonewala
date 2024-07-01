@@ -46,7 +46,6 @@ const otpverifier=async(req,res)=>{
             return res.status(400).json({ error: 'OTP not found in cookies' });
         }
         const decryptedotp = cryptr.decrypt(expectedOTP);
-
         if (otp !== decryptedotp) {
             return res.status(400).json({ error: 'Invalid OTP' });
         }

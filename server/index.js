@@ -26,7 +26,7 @@ app.use(session({
 // CORS setup
 const allowedOrigins = [
   'http://localhost:5173',
-  'https://phonewala-ecommerce.vercel.app' // Add your production client URL here
+  'https://phonewalaclient.vercel.app' // Add your production client URL here
 ];
 
 const corsOptions = {

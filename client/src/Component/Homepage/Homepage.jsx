@@ -97,9 +97,9 @@ function Homepage(props) {
                         style={{ width: '100%', height: '300px' }}
                       />
                       <div className="card-body">
-                        <p className="card-title" style={{ fontWeight: "400" }}><strong></strong>{mobile.model_name}</p>  
+                        <p className="card-title-home" style={{ fontWeight: "400" }}><strong></strong>{mobile.model_name}</p>  
                         {/* <p className="card-text"><strong>Company :</strong> {mobile.company_name}</p> */}
-                        <p className="card-text"><b>₹</b>{mobile.price}</p>
+                        <p className="card-text-home"><b>₹</b>{mobile.price}</p>
                         <button onClick={(e) => handlesubmit(e, mobile._id)} style={{ margin: " 0 auto", color: "red", display: "block", height: "40px", fontWeight: "500", fontSize: "1.2rem", border: "0.5px solid white", backgroundColor: "pink", margin: "0 auto" ,borderRadius:"10px" }} className='icon'>Add to cart</button>
                       </div>
                     </Link>

@@ -24,8 +24,19 @@ app.use(session({
 }));
 
 // CORS setup
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://phonewalaclient.vercel.app' // Add your production client URL here
+];
+
 const corsOptions = {
-  origin: 'http://localhost:5173', // Replace with your frontend's URL
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true, // Allow cookies and other credentials to be sent
 };
 app.use(cors(corsOptions));

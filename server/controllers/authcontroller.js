@@ -31,7 +31,13 @@ const signupcontroller = async (req, res) => {
             sameSite: 'None',
             maxAge: 5 * 60 * 1000,
         });
-        req.session.signupData = { name, email, password };
+        const signupData = cryptr.encrypt(JSON.stringify({ name, email, password }));
+        res.cookie('signupData', signupData, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'None',
+            maxAge: 5 * 60 * 1000, // 5 minutes
+        });
         res.status(200).json({ message: 'OTP sent successfully', encryptedotp });
     } catch (err) {
         console.error(err);
@@ -52,10 +58,17 @@ const otpverifier=async(req,res)=>{
         }
 
         res.clearCookie('otp');
-        const { name, email, password } = req.session.signupData || {};
+        const signupDataEncrypted = req.cookies.signupData;
+        if (!signupDataEncrypted) {
+            return res.status(400).json({ error: 'Signup data not found in cookies' });
+        }
+
+        const signupData = JSON.parse(cryptr.decrypt(signupDataEncrypted));
+        const { name, email, password } = signupData;
         if (!name || !email || !password) {
-            return res.status(400).json({ error: 'Signup data incomplete or not found in session' });
-        } 
+            return res.status(400).json({ error: 'Signup data incomplete or not found in cookies' });
+        }
+
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -67,7 +80,7 @@ const otpverifier=async(req,res)=>{
 
         const data = { user: { id: user.id } };
         const authtoken = jwt.sign(data, process.env.AUTH_TOKEN);
-
+        res.clearCookie('signupData'); // Clear signup data cookie after use
         res.status(200).json({ message: 'Signup successful' ,authtoken});
     } catch (err) {
         console.error(err);

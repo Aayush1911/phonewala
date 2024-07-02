@@ -18,7 +18,8 @@ app.use(session({
   secret: 'sfsedsdvsvjhffbdhsdfnfnfbdncbd', 
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true,    httpOnly: true,sameSite:'None'
+  cookie: { secure: true, 
+       httpOnly: true,sameSite:'None'
   } 
 }));
 
